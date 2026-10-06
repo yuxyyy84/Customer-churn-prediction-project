@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>yuxyyy.streamlit · Customer Churn Predictor</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📉</text></svg>">
+<style>
+:root{
+  --paper:#EEF3F6; --ink:#10243A; --muted:#51667A; --line:#C9D6DF;
+  --leave:#E5484D; --stay:#1F8A70; --card:#FFFFFF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;line-height:1.55}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header{padding:20px 0;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.01em;text-decoration:none}
+.brand span{color:var(--leave)}
+nav a{margin-left:20px;color:var(--muted);text-decoration:none;font-size:.95rem}
+nav a:hover,nav a:focus-visible{color:var(--ink);text-decoration:underline}
+.hero{padding:64px 0 40px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;
+  font-size:clamp(2.1rem,5.5vw,3.6rem);line-height:1.08;margin:0 0 18px;max-width:16ch}
+.lede{font-size:1.15rem;color:var(--muted);max-width:56ch;margin:0 0 28px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;font-weight:600;
+  text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:var(--leave);border-color:var(--leave)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--leave);outline-offset:3px}
+.demo{margin:8px 0 56px}
+.frame{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);
+  font-size:.9rem;color:var(--muted);background:#F7FAFC}
+.bar b{color:var(--ink)}
+.bar .dot{width:9px;height:9px;border-radius:50%;background:var(--stay)}
+iframe{display:block;width:100%;height:720px;border:0}
+.note{font-size:.9rem;color:var(--muted);margin:10px 2px 0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;
+  padding:36px 0;border-top:1px solid var(--line)}
+.facts h2{font-size:1rem;margin:0 0 6px}
+.facts p{margin:0;color:var(--muted);font-size:.96rem}
+.risk{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:0 0 10px}
+.risk i{display:block}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+@media (max-width:600px){iframe{height:620px}nav a{margin:0 16px 0 0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">yuxyyy<span>.streamlit</span></a>
+    <nav>
+      <a href="#app">Live app</a>
+      <a href="#about">About</a>
+      <a href="https://yuxyyy.streamlit.app" target="_blank" rel="noopener">Open full screen</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <h1>Which customers are about to leave?</h1>
+    <p class="lede">Enter a telecom customer's details and get a churn probability with a plain risk rating. Trained on 7,043 real customers; it catches about 74% of the ones who actually leave.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://yuxyyy.streamlit.app" target="_blank" rel="noopener">Open the app</a>
+      <a class="btn ghost" href="#about">How it works</a>
+    </div>
+  </section>
+
+  <section class="wrap demo" id="app">
+    <div class="frame">
+      <div class="bar"><span class="dot"></span><b>yuxyyy.streamlit.app</b></div>
+      <iframe src="https://yuxyyy.streamlit.app/?embed=true" title="Customer Churn Predictor app" loading="lazy"></iframe>
+    </div>
+    <p class="note">If the app is asleep or blank, open it in its own tab: <a href="https://yuxyyy.streamlit.app" target="_blank" rel="noopener">yuxyyy.streamlit.app</a>. Free Streamlit apps can take a moment to wake up.</p>
+  </section>
+
+  <section class="wrap facts" id="about">
+    <div>
+      <h2>Tuned for catching churn</h2>
+      <div class="risk" aria-hidden="true"><i style="width:26%;background:var(--leave)"></i><i style="width:74%;background:var(--stay)"></i></div>
+      <p>The decision threshold is lowered from 0.50 to 0.33, so recall on churners rises from about 51% to 74%, with some loss of precision.</p>
+    </div>
+    <div>
+      <h2>Honest evaluation</h2>
+      <p>5-fold cross-validation, grid search and threshold tuning all use training data only. The 20% test set is touched once. ROC-AUC is 0.846.</p>
+    </div>
+    <div>
+      <h2>Three models compared</h2>
+      <p>Logistic Regression, Random Forest and Gradient Boosting. A tuned Gradient Boosting model won.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Built by <b>yuxyyy</b> · <a href="https://yuxyyy.streamlit.app" target="_blank" rel="noopener">yuxyyy.streamlit.app</a></div>
+</footer>
+</body>
+</html>
